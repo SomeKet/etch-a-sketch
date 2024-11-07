@@ -11,16 +11,8 @@
 }
 
 .column {
-    background-color: bisque;
+    background-color: white;
     width: 20px;
     height: 20px;
     border: 1px solid black;
-    transition:0.3s;
-    opacity: 0.6;
-}
-
-
-.column:hover {
-    background-color: brown;
-    opacity: 1;
 }
