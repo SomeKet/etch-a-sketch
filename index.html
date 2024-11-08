@@ -9,21 +9,23 @@
 </head>
 <body>
     <div class="gridMenu">
+        
         <div class="colorMenu">
-            <button type="click" style="background-color: black; color:aliceblue"class="color" id="btnBlack">Black</button>
-            <button type="click" style="background-color:orangered"class="color" id="btnOrange">Orange</button>
-            <button type="click" style="background-color: pink" id="btnPink">Pink</button>
+            <form id="colorForm">
+                <label for="colorpicker">Wähle deine Farbe aus und bestätige</label>
+                <button type="submit">Farbknopf</button>
+                <input type="color" name="color" id="colorpicker">
+            </form>
             <button type="click" style="background-color: transparent" id="btnEraser">Eraser</button>
         </div>
         <form id="gridForm">
+            <label for="rows" >Anzahl der Zeilen</label>
+            <input type="number" id="rows" name="rows" min="1" required>
             <label for="columns">Anzal der Spalten</label>
             <input type="number" id="columns" name="columns" min="1" required>
-
-            <label for="rows">Anzahl der Zeilen</label>
-            <input type="number" id="rows" name="rows" min="1" required>
-
             <button type="submit">Create Grid</button>
         </form>
+        <button type="click" id="deletePicture">Reset</button>
     </div>
     <div class="container" id="sixteenXsixteen"></div>
 </body>
