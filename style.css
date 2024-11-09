@@ -2,14 +2,33 @@
     box-sizing: border-box;
 }
 header{
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
+
+section{
+    display:flex; 
+    gap:5%;
+    margin:16px;
+}
+
 .setup, .gridMap{
     border: 1px solid black;
+}
+
+.gridMap{
+    display:flex;
+    width:78%;
+    flex-flow:wrap;
+    background-color: whitesmoke;
 }
 
 .setup{
     display:flex;
     justify-content: space-around;
+    width: 100%;
 }
+
+.cell{
+    border: 1px solid black;
+}
+

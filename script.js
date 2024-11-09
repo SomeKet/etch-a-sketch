@@ -1,41 +1,49 @@
 const gridMap = document.querySelector('.gridMap');
-const color = {current:""};
-const sizeBtn = document.querySelector('.sbmButton');
+const sizeBtn = document.querySelector('.sbmBtn');
 const eraserBtn = document.querySelector('.eraser');
+const colorPara = document.querySelector('.colorRGBA');
 
-sizeBtn.addEventListener('submit', function(e){
+
+sizeBtn.addEventListener('click', function(e){
     e.preventDefault();
-    const size = document.getElementById('sizeInput').value;
-
-    if(size < 0 || size > 100){
-        alert("Wähle eine Zahlen zwischen 1 und 100");
-    }
-    console.log("!")
+    const size = document.getElementById("sizeInput").value;
     createMap(size);
 
 })
 
 
+function createMap(pixel) {
+    let size = (100 / pixel) + "%";
+    gridMap.style.cssText = ('style', `height:${gridMap.clientWidth}px`);
 
-function createMap(pixel){
-    
-    for(let rIndex = 0; rIndex < pixel; rIndex++ ){
-        const rowElement = document.createElement("div");
-        rowElement.classList.add("row");
-    
-    
-    for (let cIndex = 0; cIndex < pixel; cIndex++) {
+    for (let index = 0; index < pixel ** 2; index++) {
         const cell = document.createElement("div");
-        cell.classList.add("column");
-
-        //Mouseover EventListener
-        cell.addEventListener('mouseover', () => {
-            cell.style.backgroundColor= color.current;
-        });
-
-        rowElement.appendChild(cell);
-        }
-        gridMap.appendChild(rowElement);
-       
+        cell.classList.add("cell");
+        cell.setAttribute('style', `text-align:center; width:${size}; height:${size}; background-color:white`);
+        
+        coloring(cell);
+        gridMap.appendChild(cell);
     }
+}
+
+function coloring(element){
+    var opac = 1;
+    element.addEventListener('mouseover', ()=>{
+        const color = document.getElementById('colorId').value;
+
+        var red = parseInt(color.substring(1,3), 16);
+        var green = parseInt(color.substring(3,5), 16);
+        var blue = parseInt(color.substring(5,7), 16);
+    
+        if(opac < 11){
+            var rgba = `rgba(${red}, ${green}, ${blue}, ${opac/10})`;
+            element.style.backgroundColor = `rgba(${red}, ${green}, ${blue}, ${opac/10})`;
+            console.log(rgba);
+            opac ++;
+        }else{
+            console.log("finish")
+        }
+    })
+
+  
 }
