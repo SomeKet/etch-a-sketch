@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <header>Etch-A-Sketch</header>
+    <section>
+        <div class="setup">
+            <div class="sizingSetup">
+                <label title="Größenauwahl für Pixel x Pixel Raster"for="sizeInput">Pixel Größe</label>
+                <input value="16" type="number" id="sizeInput" min="0" max="100">
+                <input type="submit" value="Go!" class="sbmButton" id="sizeBtn"></button>
+            </div>
+            <div class="color">
+                <input type="color">
+                <button type="click" class="eraser" id="eraserBtn"><img src="images/eraser-outline-icon.png" width="15px" height="15px" alt="Radiergummi"></button>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="gridMap">
+            
+        </div>
+    </section>
+</body>
+</html>

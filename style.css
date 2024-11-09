@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+header{
+    display: flex;
+    justify-content: center;
+}
+.setup, .gridMap{
+    border: 1px solid black;
+}
+
+.setup{
+    display:flex;
+    justify-content: space-around;
+}
