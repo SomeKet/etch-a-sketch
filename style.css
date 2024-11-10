@@ -17,7 +17,7 @@ section{
 
 .gridMap{
     display:flex;
-    width:78%;
+    width:100%;
     flex-flow:wrap;
     background-color: whitesmoke;
 }
