@@ -23,6 +23,11 @@ colorPick.addEventListener('click', ()=>{
 
 
 function createMap(pixel) {
+    let map = document.querySelectorAll(".cell");
+    if(map){
+        map.forEach(cell => cell.remove());
+    }
+
     let size = (100 / pixel) + "%";
     gridMap.style.cssText = ('style', `height:${gridMap.clientWidth}px`);
 
