@@ -3,7 +3,20 @@ const sizeBtn = document.querySelector('.sbmBtn');
 const eraserBtn = document.querySelector('.eraser');
 const colorPick = document.getElementById('colorId');
 const eraserFlag ={current: false};
+const isPainting = {current:false};
+const fileInput = document.getElementById("pictureUploader");
+const uploaderBtn = document.getElementById("uploaderBtn");
 
+document.addEventListener('mousedown', (event) =>{
+    if(event.button === 0){
+        isPainting.current = true;
+        console.log("Push");
+    }
+})
+document.addEventListener('mouseup', () =>{
+    isPainting.current = false;
+    console.log("Up");
+})
 
 
 sizeBtn.addEventListener('click', function(e){
@@ -21,8 +34,30 @@ colorPick.addEventListener('click', ()=>{
     eraserFlag.current = false;
 })
 
+//Sollte als "Nachmalen"-Feature dienen. Ein Bild hochladen und nachmalen. 
+uploaderBtn.addEventListener('click', function(event){
+    event.preventDefault();
+
+    const file = fileInput.files[0];
+    if(file){
+        const reader = new FileReader();
+        reader.onload = (e) =>{
+            gridMap.style.backgroundImage = `url(${e.target.result})`;
+            gridMap.style.backgroundSize = "contain";
+            gridMap.style.backgroundRepeat = "no-repeat";
+            gridMap.style.backgroundPosition = "center";
+
+        };
+        reader.readAsDataURL(file);
+    }else{
+        alert("Bitte ein Bild wählen!");
+    }
+
+})
+
 
 function createMap(pixel) {
+    document.querySelector(".imageForm").style.display = "block";
     let map = document.querySelectorAll(".cell");
     if(map){
         map.forEach(cell => cell.remove());
@@ -36,7 +71,9 @@ function createMap(pixel) {
         cell.classList.add("cell");
         cell.setAttribute('style', `text-align:center; width:${size}; height:${size}; background-color:transparent`);
         
+
         coloring(cell);
+        
         gridMap.appendChild(cell);
     }
 }
@@ -48,7 +85,7 @@ function coloring(element){
     element.addEventListener('mouseover', ()=>{
         if(eraserFlag.current == true){
             element.style.backgroundColor = "transparent";
-        }else{
+        }else if(isPainting.current){
             //Farbe aus Input
             const color = colorPick.value;
     
@@ -70,3 +107,4 @@ function coloring(element){
         }
     })      
 }
+
