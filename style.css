@@ -36,3 +36,7 @@ section{
     display:none;
 }
 
+#pictureBtn, #borderBtn{
+    display:none;
+}
+

@@ -4,8 +4,12 @@ const eraserBtn = document.querySelector('.eraser');
 const colorPick = document.getElementById('colorId');
 const eraserFlag ={current: false};
 const isPainting = {current:false};
+const borderFlag = {current:true};
+const picFlag =  {current:false};
 const fileInput = document.getElementById("pictureUploader");
 const uploaderBtn = document.getElementById("uploaderBtn");
+const borderBtn = document.getElementById("borderBtn");
+const pictureBtn = document.getElementById("pictureBtn");
 
 document.addEventListener('mousedown', (event) =>{
     if(event.button === 0){
@@ -13,6 +17,7 @@ document.addEventListener('mousedown', (event) =>{
         console.log("Push");
     }
 })
+
 document.addEventListener('mouseup', () =>{
     isPainting.current = false;
     console.log("Up");
@@ -26,6 +31,28 @@ sizeBtn.addEventListener('click', function(e){
 
 })
 
+//Border im Grid Sichtbarkeit
+borderBtn.addEventListener("click", ()=>{
+    if(borderFlag.current){
+        document.querySelectorAll(".cell").forEach(e=>e.style.border ="none");
+        borderFlag.current = false;
+    }else{
+        document.querySelectorAll(".cell").forEach(e=>e.style.border ="solid 1px black");
+        borderFlag.current = true;
+    }
+})
+
+//Bild Sichtbarkeit
+pictureBtn.addEventListener("click", ()=>{
+    if(picFlag.current){
+        gridMap.style.backgroundImage = "none";
+        picFlag.current = false;
+    }else{
+        uploadPicture();
+    }
+    
+})
+
 //Flag setzen für Farbe oder Radiergummi
 eraserBtn.addEventListener('click', ()=>{
     eraserFlag.current = true;
@@ -35,8 +62,13 @@ colorPick.addEventListener('click', ()=>{
 })
 
 //Sollte als "Nachmalen"-Feature dienen. Ein Bild hochladen und nachmalen. 
-uploaderBtn.addEventListener('click', function(event){
-    event.preventDefault();
+uploaderBtn.addEventListener('click', uploadPicture);
+
+function uploadPicture(event){
+    if(event){
+        event.preventDefault();
+    }
+    
 
     const file = fileInput.files[0];
     if(file){
@@ -49,11 +81,15 @@ uploaderBtn.addEventListener('click', function(event){
 
         };
         reader.readAsDataURL(file);
+
+        //Picture On-Off Button
+        pictureBtn.style.display = "block";
+        picFlag.current = true;
+        console.log(picFlag.current)
     }else{
         alert("Bitte ein Bild wählen!");
     }
-
-})
+}
 
 
 function createMap(pixel) {
@@ -62,6 +98,7 @@ function createMap(pixel) {
     if(map){
         map.forEach(cell => cell.remove());
     }
+    borderBtn.style.display = "block";
 
     let size = (100 / pixel) + "%";
     gridMap.style.cssText = ('style', `height:${gridMap.clientWidth}px`);
