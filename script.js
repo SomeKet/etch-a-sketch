@@ -94,29 +94,31 @@ function uploadPicture(event){
 
 function createMap(pixel) {
     if(pixel> 100){
-        alert("Please choose a number between 1-99");
-    }
-
-    document.querySelector(".imageForm").style.display = "block";
-    let map = document.querySelectorAll(".cell");
-    if(map){
-        map.forEach(cell => cell.remove());
-    }
-    borderBtn.style.display = "block";
-
-    let size = (100 / pixel) + "%";
-    gridMap.style.cssText = ('style', `height:${gridMap.clientWidth}px`);
-
-    for (let index = 0; index < pixel ** 2; index++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        cell.setAttribute('style', `text-align:center; width:${size}; height:${size}; background-color:transparent`);
+        alert("Please choose a number between 1-100");
+    }else{
         
-
-        coloring(cell);
-        
-        gridMap.appendChild(cell);
+        document.querySelector(".imageForm").style.display = "block";
+        let map = document.querySelectorAll(".cell");
+        if(map){
+            map.forEach(cell => cell.remove());
+        }
+        borderBtn.style.display = "block";
+    
+        let size = (100 / pixel) + "%";
+        gridMap.style.cssText = ('style', `height:${gridMap.clientWidth}px`);
+    
+        for (let index = 0; index < pixel ** 2; index++) {
+            const cell = document.createElement("div");
+            cell.classList.add("cell");
+            cell.setAttribute('style', `text-align:center; width:${size}; height:${size}; background-color:transparent`);
+            
+    
+            coloring(cell);
+            
+            gridMap.appendChild(cell);
+        }
     }
+
 }
 
 function coloring(element){
