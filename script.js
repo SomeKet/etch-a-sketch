@@ -93,6 +93,10 @@ function uploadPicture(event){
 
 
 function createMap(pixel) {
+    if(pixel> 100){
+        alert("Please choose a number between 1-99");
+    }
+
     document.querySelector(".imageForm").style.display = "block";
     let map = document.querySelectorAll(".cell");
     if(map){
