@@ -6,20 +6,25 @@ const eraserFlag ={current: false};
 const isPainting = {current:false};
 const borderFlag = {current:true};
 const picFlag =  {current:false};
+const mouseIsdown = {current:false};
 const fileInput = document.getElementById("pictureUploader");
 const uploaderBtn = document.getElementById("uploaderBtn");
 const borderBtn = document.getElementById("borderBtn");
 const pictureBtn = document.getElementById("pictureBtn");
 
+document.addEventListener("dragstart", (event) => event.preventDefault());
+
 document.addEventListener('mousedown', (event) =>{
     if(event.button === 0){
         isPainting.current = true;
+        mouseIsdown.current = true;
         console.log("Push");
     }
 })
 
 document.addEventListener('mouseup', () =>{
     isPainting.current = false;
+    mouseIsdown.current = false;
     console.log("Up");
 })
 
@@ -125,12 +130,14 @@ function coloring(element){
     var opac = 1;
     var prevColor = null;
 
+    
+
     element.addEventListener('mouseover', ()=>{
         if(eraserFlag.current == true){
-            
-            element.addEventListener('mousedown', ()=>{
+            if(mouseIsdown.current){
                 element.style.backgroundColor = "transparent";
-            })
+
+            }
         }else if(isPainting.current){
             //Farbe aus Input
             const color = colorPick.value;
