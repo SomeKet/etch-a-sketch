@@ -127,7 +127,10 @@ function coloring(element){
 
     element.addEventListener('mouseover', ()=>{
         if(eraserFlag.current == true){
-            element.style.backgroundColor = "transparent";
+            
+            element.addEventListener('mousedown', ()=>{
+                element.style.backgroundColor = "transparent";
+            })
         }else if(isPainting.current){
             //Farbe aus Input
             const color = colorPick.value;
